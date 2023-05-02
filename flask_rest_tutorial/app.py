@@ -21,7 +21,11 @@ tasks = [
     }
 ]
 
-
+warning_colour = '\033[93m'
+end_colour = '\033[0m'
+blue = '\033[94m'
+cyan = '\033[96m'
+green = '\033[92m'
 def task_with_uri(task):
     new_task = {}
     for key in task:
@@ -32,24 +36,22 @@ def task_with_uri(task):
     return new_task
 
 def hello():
-    print('Starting fast operation...')
+    logging.info(f"{blue}Starting fast operation...{end_colour}")
     # await asyncio.sleep(3)
     sleep(1)
-    print('Short completed')
+    logging.info(f"{blue}Short completed{end_colour}")
     return 1
 
 def hello_stupid():
-    print('Starting long operation...')
+    logging.info(f"{green}Starting long operation...{end_colour}")
     sleep(5) 
-    print('Long completed')
+    logging.info(f"{green}Long completed{end_colour}")
     return 1 
 
 # async demo
 @app.route('/api/async/<int:func_id>', methods=['GET'])
 def async_call(func_id):
     thread = threading.current_thread().name
-    warning_colour = '\033[93m'
-    end_colour = '\033[0m'
     logging.info(f"{warning_colour}In thread: {thread}{end_colour}") 
     # print(f'Bla bla bla: {threading.current_thread().name}') 
     # result = await hello()
